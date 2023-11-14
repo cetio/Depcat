@@ -1,0 +1,6 @@
+External dependency bundler.
+Mods made using Depcat will be bundled into .tmod.depcat files that can only be loaded if using Dependacat.
+
+For developers:
+To bundle a dependency with your mod, make a "depcat" folder in your source, and put your libraries in there.
+They will automatically get bundled after building.

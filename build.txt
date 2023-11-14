@@ -1,0 +1,4 @@
+displayName = Depcat
+author = cet
+version = 0.1
+dllReferences = PeNet, PeNet.Asn1, System.Security.Cryptography.Pkcs, System.Formats.Asn1

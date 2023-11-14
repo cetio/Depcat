@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\TModLoader.targets" />
+  <PropertyGroup>
+    <AssemblyName>Depcat</AssemblyName>
+    <TargetFramework>net6.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>9999</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>9999</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="PeNet" Version="4.0.2" />
+    <PackageReference Include="PeNet.Asn1" Version="2.0.1" />
+    <PackageReference Include="TModLoader.CodeAssist" Version="0.1.*" />
+  </ItemGroup>
+</Project>
