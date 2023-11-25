@@ -14,7 +14,6 @@ public sealed class TModFile
 
     public static bool TryReadFromPath(string path, out TModFile tmodFile)
     {
-        System.Windows.Forms.MessageBox.Show("PATH", "");
         return TryReadFromArray(File.ReadAllBytes(path), out tmodFile);
     }
 

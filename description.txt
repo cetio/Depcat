@@ -1,6 +1,6 @@
 External dependency bundler.
-Mods made using Depcat will be bundled into .tmod.depcat files that can only be loaded if using Dependacat.
+Mods with a /Depcat/ directory upon compile will be unpacked by Depcat.
+Will export all dependencies to C:\Users\%USER%\Documents\My Games\Terraria\tModLoader\Depcat, or whatever the current TModLoader path is.
 
-For developers:
-To bundle a dependency with your mod, make a "depcat" folder in your source, and put your libraries in there.
-They will automatically get bundled after building.
+Includes unmanaged function pointer calling, but PInvoke obviously also works.
+Must use the Depcat.Importer field to get the importer and use the methods.

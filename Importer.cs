@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.PortableExecutable;
+using System.Windows.Forms;
 using Terraria.ModLoader;
 
 namespace Depcat
@@ -70,7 +71,35 @@ namespace Depcat
                     ((delegate* unmanaged<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, void>)func.Address)(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
                     break;
             }
-            
+        }
+
+        public unsafe dynamic Call<T>(string name, string entrypoint, params dynamic[] args)
+        {
+            ExportFunction func = ResolveImport(name, entrypoint);
+
+            switch (args.Length)
+            {
+                case 1:
+                    return ((delegate* unmanaged<dynamic, T>)func.Address)(args[0]);
+                case 2:
+                    return ((delegate* unmanaged<dynamic, dynamic, T>)func.Address)(args[0], args[1]);
+                case 3:
+                    return ((delegate* unmanaged<dynamic, dynamic, dynamic, T>)func.Address)(args[0], args[1], args[2]);
+                case 4:
+                    return ((delegate* unmanaged<dynamic, dynamic, dynamic, dynamic, T>)func.Address)(args[0], args[1], args[2], args[3]);
+                case 5:
+                    return ((delegate* unmanaged<dynamic, dynamic, dynamic, dynamic, dynamic, T>)func.Address)(args[0], args[1], args[2], args[3], args[4]);
+                case 6:
+                    return ((delegate* unmanaged<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, T>)func.Address)(args[0], args[1], args[2], args[3], args[4], args[5]);
+                case 7:
+                    return ((delegate* unmanaged<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, T>)func.Address)(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+                case 8:
+                    return ((delegate* unmanaged<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, T>)func.Address)(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+                case 9:
+                    return ((delegate* unmanaged<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, T>)func.Address)(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+                default:
+                    return ((delegate* unmanaged<T>)func.Address)();
+            }
         }
 
         public void ResolveDepcats()

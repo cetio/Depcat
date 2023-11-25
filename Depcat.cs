@@ -1,22 +1,20 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Forms;
+using System.Linq;
+using System.Reflection;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Core;
 
 namespace Depcat
 {
     public class Depcat : Mod
     {
-        public static readonly Importer Importer = new Importer();
+        internal static readonly Importer Importer = new Importer();
 
         public override void Load()
         {
-            //MonoModHooks.Add(typeof(LocalizationLoader).GetMethod("HandleModBuilt", BindingFlags.NonPublic | BindingFlags.Static), Listeners.BuildListener);
-            //MonoModHooks.Add(typeof(ModLoader).GetMethod("Load", BindingFlags.NonPublic | BindingFlags.Static), Listeners.LoadListener);
-            //MonoModHooks.Add(typeof(TmodFile).Assembly.GetTypes().Where(x => x.Name == "ModOrganizer").First().GetMethod("_FindMods", BindingFlags.NonPublic | BindingFlags.Static), Listeners.FindModsListener);
-            Importer.ResolveDepcats();
-            MessageBox.Show(Importer.ResolveFunctions(Importer.ResolveImport("libdeflate"))[0].Name, "");
+            MonoModHooks.Add(typeof(ModLoader).GetMethod("Load", BindingFlags.NonPublic | BindingFlags.Static), Listeners.LoadListener);
+            MonoModHooks.Add(typeof(TmodFile).Assembly.GetTypes().Where(x => x.Name == "ModOrganizer").First().GetMethod("_FindMods", BindingFlags.NonPublic | BindingFlags.Static), Listeners.FindModsListener);
         }
 
         internal static string GetCallingNamespace()
@@ -38,6 +36,11 @@ namespace Depcat
             }
 
             return "Depcat";
+        }
+
+        public static Importer GetImporter()
+        {
+            return Importer;
         }
     }
 }
